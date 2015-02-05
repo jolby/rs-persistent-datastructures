@@ -21,8 +21,8 @@ macro_rules! assert_find(
     );
 );
 
-static BENCH_FIND_COUNT: uint = 1000;
-static BENCH_INSERT_COUNT: uint = 1000;
+static BENCH_FIND_COUNT: usize = 1000;
+static BENCH_INSERT_COUNT: usize = 1000;
 
 pub struct Test;
 
@@ -156,7 +156,7 @@ impl<IS> Test
     }
 }
 
-fn create_random_std_hashmap(count: uint) -> HashMap<u64, u64> {
+fn create_random_std_hashmap(count: usize) -> HashMap<u64, u64> {
     let mut hashmap = HashMap::<u64, u64>::new();
     let mut rng = StdRng::new().ok().expect("Could not create random number generator");
 
@@ -169,7 +169,7 @@ fn create_random_std_hashmap(count: uint) -> HashMap<u64, u64> {
 }
 
 
-fn create_unique_values(count: uint) -> Vec<u64> {
+fn create_unique_values(count: usize) -> Vec<u64> {
     create_random_std_hashmap(count).keys().map(|x| *x).collect()
 }
 
@@ -179,7 +179,7 @@ pub static mut results: [Option<u64>; 1000000] = [None; 1000000];
 impl<IS> Test
     where IS: ItemStore<u64, u64> {
 
-    fn create_random_map(empty: HamtMap<u64, u64, IS>, count: uint) -> (HamtMap<u64, u64, IS>, Vec<u64>) {
+    fn create_random_map(empty: HamtMap<u64, u64, IS>, count: usize) -> (HamtMap<u64, u64, IS>, Vec<u64>) {
         let keys = create_unique_values(count);
         let mut map = empty;
 
@@ -190,7 +190,7 @@ impl<IS> Test
         return (map, keys);
     }
 
-    pub fn bench_find(empty: HamtMap<u64, u64, IS>, count: uint, bh: &mut Bencher) {
+    pub fn bench_find(empty: HamtMap<u64, u64, IS>, count: usize, bh: &mut Bencher) {
         let (map, keys) = Test::create_random_map(empty, count);
 
         bh.iter(|| {
@@ -209,7 +209,7 @@ impl<IS> Test
         })
     }
 
-    pub fn bench_insert(empty: HamtMap<u64, u64, IS>, count: uint, bh: &mut Bencher) {
+    pub fn bench_insert(empty: HamtMap<u64, u64, IS>, count: usize, bh: &mut Bencher) {
         let (map, keys) = Test::create_random_map(empty, count + BENCH_INSERT_COUNT);
 
         bh.iter(|| {
@@ -222,7 +222,7 @@ impl<IS> Test
         })
     }
 
-    pub fn bench_remove(empty: HamtMap<u64, u64, IS>, count: uint, bh: &mut Bencher) {
+    pub fn bench_remove(empty: HamtMap<u64, u64, IS>, count: usize, bh: &mut Bencher) {
         let (map, keys) = Test::create_random_map(empty, count);
 
         bh.iter(|| {
@@ -235,7 +235,7 @@ impl<IS> Test
     }
 }
 
-fn bench_find_hashmap(count: uint, bh: &mut Bencher) {
+fn bench_find_hashmap(count: usize, bh: &mut Bencher) {
     let values = create_unique_values(count);
     let mut map = HashMap::new();
 
@@ -257,7 +257,7 @@ fn bench_find_hashmap(count: uint, bh: &mut Bencher) {
     })
 }
 
-fn bench_insert_hashmap(count: uint, bh: &mut Bencher) {
+fn bench_insert_hashmap(count: usize, bh: &mut Bencher) {
     let values = create_unique_values(count + BENCH_INSERT_COUNT);
     let mut map = HashMap::new();
 
@@ -275,7 +275,7 @@ fn bench_insert_hashmap(count: uint, bh: &mut Bencher) {
     })
 }
 
-fn bench_clone_hashmap(count: uint, bh: &mut Bencher) {
+fn bench_clone_hashmap(count: usize, bh: &mut Bencher) {
     let values = create_unique_values(count);
     let mut map = HashMap::new();
 
@@ -288,7 +288,7 @@ fn bench_clone_hashmap(count: uint, bh: &mut Bencher) {
     })
 }
 
-fn bench_remove_hashmap(count: uint, bh: &mut Bencher) {
+fn bench_remove_hashmap(count: usize, bh: &mut Bencher) {
     let values = create_unique_values(count);
     let mut map = HashMap::new();
 
