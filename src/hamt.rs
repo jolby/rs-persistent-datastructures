@@ -26,7 +26,6 @@
 
 use std::hash::{Hasher, Hash};
 use std::collections::hash_state::HashState;
-use std::collections::hash_map::RandomState;
 use std::intrinsics;
 use std::mem;
 use std::ptr;
@@ -499,13 +498,13 @@ impl<K, V, IS, S> UnsafeNode<K, V, IS, S>
                         let mut new_items = Vec::with_capacity(item_count);
 
                         if position > 0 {
-                            new_items.push_all(items.slice_to(position));
+                            new_items.push_all(&items[..position]);
                         }
 
                         new_items.push(new_kvp);
 
                         if position < item_count - 1 {
-                           new_items.push_all(items.slice_from(position + 1));
+                           new_items.push_all(&items[position + 1..]);
                         }
 
                         assert!(new_items.len() == item_count);
@@ -622,13 +621,13 @@ impl<K, V, IS, S> UnsafeNode<K, V, IS, S>
                         let mut new_items = Vec::with_capacity(item_count);
 
                         if position > 0 {
-                            new_items.push_all(items.slice_to(position));
+                            new_items.push_all(&items[..position]);
                         }
 
                         new_items.push(new_kvp);
 
                         if position < item_count - 1 {
-                           new_items.push_all(items.slice_from(position + 1));
+                           new_items.push_all(&items[position + 1..]);
                         }
 
                         assert!(new_items.len() == item_count);
@@ -722,10 +721,10 @@ impl<K, V, IS, S> UnsafeNode<K, V, IS, S>
                             let mut new_items = Vec::with_capacity(item_count);
 
                             if position > 0 {
-                                new_items.push_all(items.slice_to(position));
+                                new_items.push_all(&items[..position]);
                             }
                             if position < item_count - 1 {
-                                new_items.push_all(items.slice_from(position + 1));
+                                new_items.push_all(&items[position + 1..]);
                             }
                             assert!(new_items.len() == item_count);
 
@@ -828,10 +827,10 @@ impl<K, V, IS, S> UnsafeNode<K, V, IS, S>
                             let mut new_items = Vec::with_capacity(item_count);
 
                             if position > 0 {
-                                new_items.push_all(items.slice_to(position));
+                                new_items.push_all(&items[position..]);
                             }
                             if position < item_count - 1 {
-                                new_items.push_all(items.slice_from(position + 1));
+                                new_items.push_all(&items[position + 1..]);
                             }
                             assert!(new_items.len() == item_count);
 

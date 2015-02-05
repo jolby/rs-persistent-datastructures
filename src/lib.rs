@@ -25,6 +25,11 @@
 //! example.
 
 #![feature(int_uint)]
+#![feature(alloc)]
+#![feature(std_misc)]
+#![feature(core)]
+#![feature(hash)]
+#![feature(collections)]
 #![feature(unsafe_destructor)]
 #![feature(old_impl_check)]
 
