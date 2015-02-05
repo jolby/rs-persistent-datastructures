@@ -24,9 +24,12 @@
 //! information see [Wikipedia](https://en.wikipedia.org/wiki/Persistent_data_structure) for
 //! example.
 
+#![feature(int_uint)]
 #![feature(unsafe_destructor)]
+#![feature(old_impl_check)]
 
 #[cfg(test)]
+
 extern crate test;
 
 pub use hamt::HamtMap;

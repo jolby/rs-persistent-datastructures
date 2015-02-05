@@ -26,6 +26,7 @@ static BENCH_INSERT_COUNT: uint = 1000;
 
 pub struct Test;
 
+#[old_impl_check]
 impl<IS> Test
     where IS: ItemStore<u64, u64> {
 
@@ -174,6 +175,7 @@ fn create_unique_values(count: uint) -> Vec<u64> {
 
 pub static mut results: [Option<u64>; 1000000] = [None; 1000000];
 
+#[old_impl_check]
 impl<IS> Test
     where IS: ItemStore<u64, u64> {
 
