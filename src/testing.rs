@@ -62,7 +62,7 @@ impl<IS> Test
         let mut map = empty;
 
         for x in range(0u64, 1000u64) {
-            assert_eq!(map.len(), x as uint);
+            assert_eq!(map.len(), x as usize);
             map = map.insert(x, x).0;
             assert_find!(map, x, x);
         }
@@ -73,7 +73,7 @@ impl<IS> Test
 
         for x in range(0u64, 1000u64) {
             let key = 999u64 - x;
-            assert_eq!(map.len(), x as uint);
+            assert_eq!(map.len(), x as usize);
             map = map.insert(key, x).0;
             assert_find!(map, key, x);
         }
@@ -228,7 +228,7 @@ impl<IS> Test
         bh.iter(|| {
             let mut map = map.clone();
 
-            for x in ::std::iter::range_step(0, count as uint, 2) {
+            for x in ::std::iter::range_step(0, count as usize, 2) {
                 map = map.minus(&keys[x]);
             }
         })

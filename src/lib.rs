@@ -24,14 +24,16 @@
 //! information see [Wikipedia](https://en.wikipedia.org/wiki/Persistent_data_structure) for
 //! example.
 
-#![feature(int_uint)]
+
 #![feature(alloc)]
 #![feature(std_misc)]
 #![feature(core)]
 #![feature(hash)]
 #![feature(collections)]
 #![feature(unsafe_destructor)]
+#![feature(rand)]
 #![feature(old_impl_check)]
+#![feature(test)]
 
 #[cfg(test)]
 
