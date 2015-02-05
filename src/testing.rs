@@ -132,7 +132,7 @@ impl<IS> Test
 
         let mut map = empty;
 
-        for _ in range(0u, 500000) {
+        for _ in range(0us, 500000) {
             let value: u64 = rng.gen();
 
             if rng.gen_weighted_bool(2) {
@@ -194,7 +194,7 @@ impl<IS> Test
         let (map, keys) = Test::create_random_map(empty, count);
 
         bh.iter(|| {
-            for i in range(0u, BENCH_FIND_COUNT) {
+            for i in range(0us, BENCH_FIND_COUNT) {
                 let val = keys[i % count];
                 // lets make about of half the lookups fail
                 let val = val + (i as u64 & 1);
@@ -215,7 +215,7 @@ impl<IS> Test
         bh.iter(|| {
             let mut map1 = map.clone();
 
-            for i in range(0u, BENCH_INSERT_COUNT) {
+            for i in range(0us, BENCH_INSERT_COUNT) {
                 let val = keys[count + i];
                 map1 = map1.plus(val, val);
             }
@@ -244,7 +244,7 @@ fn bench_find_hashmap(count: usize, bh: &mut Bencher) {
     }
 
     bh.iter(|| {
-        for i in range(0u, BENCH_FIND_COUNT) {
+        for i in range(0us, BENCH_FIND_COUNT) {
             let val = values[i % count];
 
             unsafe {
@@ -268,7 +268,7 @@ fn bench_insert_hashmap(count: usize, bh: &mut Bencher) {
     bh.iter(|| {
         let mut map1 = map.clone();
 
-        for i in range(0u, BENCH_INSERT_COUNT) {
+        for i in range(0us, BENCH_INSERT_COUNT) {
             let val = values[count + i];
             map1.insert(val, val);
         }

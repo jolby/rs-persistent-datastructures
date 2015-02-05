@@ -1589,7 +1589,7 @@ mod tests {
     #[test]
     fn test_iterator_copy() {
         let mut map: HamtMap<u64, u64, CopyStore, RandomState> = HamtMap::new(RandomState::new());
-        let count = 1000u;
+        let count = 1000us;
 
         for i in range(0u64, count as u64) {
             map = map.plus(i, i);
@@ -1724,7 +1724,7 @@ mod tests {
     #[test]
     fn test_iterator_share() {
         let mut map: HamtMap<u64, u64, ShareStore, RandomState> = HamtMap::new(RandomState::new());
-        let count = 1000u;
+        let count = 1000us;
 
         for i in range(0u64, count as u64) {
             map = map.plus(i, i);
